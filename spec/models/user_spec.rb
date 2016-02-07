@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe User do
+
   before { @user = FactoryGirl.build(:user) }
 
   subject { @user }
@@ -10,4 +11,9 @@ describe User do
   it { should respond_to(:password_confirmation) }
 
   it { should be_valid }
+  
+  context "when email is not present" do
+    before { @user.email = "" }
+    it { should_not be_valid }
+  end
 end
